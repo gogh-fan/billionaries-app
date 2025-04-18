@@ -11,7 +11,8 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const billionaire = await getBillionaireById(params.id);
+  const {id} = await params;
+  const billionaire = await getBillionaireById(id);
   return {
     title: `${billionaire.name} - 조만장자 정보`,
     description: `${billionaire.name}의 상세 정보와 재산 현황`,
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BillionaireDetailPage({ params }: PageProps) {
-  const billionaire = await getBillionaireById(params.id);
+  const {id} = await params;
+  const billionaire = await getBillionaireById(id);
 
   // 숫자 형식화 (예: 1,000,000,000)
   const formatNumber = (num: number) => {
