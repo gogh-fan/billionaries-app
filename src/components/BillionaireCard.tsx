@@ -19,18 +19,24 @@ export default function BillionaireCard({ billionaire }: BillionaireCardProps) {
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat('ko-KR').format(num);
   };
-
+  
   return (
     <Link href={`/person/${billionaire.id}`}>
-      <Card className="overflow-hidden h-full transition-all hover:shadow-lg hover:scale-[1.02]">
+      <Card className="overflow-hidden h-full transition-all hover:shadow-lg hover:scale-[1.02] p-0">
         <CardHeader className="p-0">
-          <div className="relative w-full h-60">
-            <Image
-              src={billionaire.squareImage}
-              alt={billionaire.name}
-              fill
-              className="object-cover"
-            />
+          <div className="relative w-full h-90">
+            {billionaire.squareImage ? (
+              <Image
+                src={billionaire.squareImage}
+                alt={billionaire.name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span className="text-gray-500">이미지 없음</span>
+              </div>
+            )}
           </div>
         </CardHeader>
         <CardContent className="p-6">

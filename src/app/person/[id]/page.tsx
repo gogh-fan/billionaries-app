@@ -13,7 +13,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const billionaire = await getBillionaireById(params.id);
   return {
-    title: `${billionaire.name} - 억만장자 정보`,
+    title: `${billionaire.name} - 조만장자 정보`,
     description: `${billionaire.name}의 상세 정보와 재산 현황`,
   };
 }
@@ -37,12 +37,18 @@ export default async function BillionaireDetailPage({ params }: PageProps) {
         <div className="lg:col-span-1">
           <Card className="overflow-hidden">
             <div className="relative w-full h-[400px]">
-              <Image
-                src={billionaire.squareImage}
-                alt={billionaire.name}
-                fill
-                className="object-cover"
-              />
+              {billionaire.squareImage ? (
+                <Image
+                  src={billionaire.squareImage}
+                  alt={billionaire.name}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500 text-lg">이미지 없음</span>
+                </div>
+              )}
             </div>
             <CardContent className="p-6">
               <h1 className="text-3xl font-bold mb-2">{billionaire.name}</h1>
